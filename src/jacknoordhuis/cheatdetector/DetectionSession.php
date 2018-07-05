@@ -265,8 +265,8 @@ class DetectionSession {
 //					$banWaveTask->queue(new BanEntry(-1, $this->getName(), $this->getAddress(), $this->getClientId(), strtotime("+4 days"), time(), true, "You were banned automatically ¯\_(ツ)_/¯", "MAGIC I"));
 //				}
 //			}
+			Utils::broadcastStaffMessage("&a" . $this->owner->getName() . " &ehas been kicked for flying!");
 			$this->owner->kick(TextFormat::colorize("&cYou have been kicked for using a modified client!", "&", false));
-			Utils::broadcastStaffMessage("&a" . $this->getName() . " &ehas been kicked for flying!");
 		}
 	}
 
@@ -275,7 +275,7 @@ class DetectionSession {
 	 * @param float $yDistance
 	 */
 	public function updateFlyTriggers(Vector3 $to, float $yDistance) {
-		if(!$this->owner->getAllowFlight()) { // make sure the player isn't allowed to fly
+		if(!$this->owner->getAllowFlight() and $this->owner != null) { // make sure the player isn't allowed to fly
 			$level = $this->owner->getLevel();
 			$blockInId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() + 1), $to->getFloorZ())->getId(); // block at players feet (used to make sure player isn't in a transparent block (cobwebs, water, etc)
 			$blockOnId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() - 0.5), $to->getFloorZ())->getId(); // block the player is on (use this for checking slabs, stairs, etc)

@@ -32,19 +32,11 @@ class CheatDetector extends PluginBase {
 	/** @var DetectionSession[] */
 	private $sessions = [];
 
-	/** @var string[] */
-	public $staff = [];
-
 	public function onLoad() {
 		Entity::registerEntity(KillAuraDetector::class, true);
 	}
 
 	public function onEnable() {
-		$this->saveResource("Settings.yml");
-		$config = new Config($this->getDataFolder() . "Settings.yml", Config::YAML);
-
-		$this->staff = array_map('strtolower', $config->get("staff", []));
-
 		$this->listener = new EventListener($this);
 	}
 
