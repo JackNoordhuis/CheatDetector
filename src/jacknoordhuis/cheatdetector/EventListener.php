@@ -50,7 +50,7 @@ class EventListener implements Listener {
 
 		$this->plugin->openCheatDetectionSession($player, $this->osMap[spl_object_id($player)] ?? -1);
 
-		if(in_array(strtolower($player->getName()), $this->plugin->staff)) {
+		if($player->hasPermission("cheat.detection")) {
 			Utils::addStaff($player);
 		}
 	}
@@ -60,7 +60,7 @@ class EventListener implements Listener {
 
 		$this->plugin->closeCheatDetectionSession($player);
 
-		if(in_array(strtolower($player->getName()), $this->plugin->staff)) {
+		if($player->hasPermission("cheat.detection")) {
 			Utils::removeStaff($player);
 		}
 
@@ -74,7 +74,7 @@ class EventListener implements Listener {
 
 		$this->plugin->closeCheatDetectionSession($player);
 
-		if(in_array(strtolower($player->getName()), $this->plugin->staff)) {
+		if($player->hasPermission("cheat.detection")) {
 			Utils::removeStaff($player);
 		}
 
@@ -110,10 +110,12 @@ class EventListener implements Listener {
 
 	public function onMove(PlayerMoveEvent $event) {
 		$player = $event->getPlayer();
-		$s = $this->plugin->getCheatDetectionSession($player);
+		if(!$player->hasPermission("vipcmds.fly")){
+			$s = $this->plugin->getCheatDetectionSession($player);
 
-		$s->lastMoveTime = microtime(true);
-		$s->updateFlyTriggers($event->getTo(), round($event->getTo()->getY() - $event->getFrom()->getY(), 3));
+			$s->lastMoveTime = microtime(true);
+			$s->updateFlyTriggers($event->getTo(), round($event->getTo()->getY() - $event->getFrom()->getY(), 3));
+		}
 	}
 
 	public function onJump(PlayerJumpEvent $event) {
