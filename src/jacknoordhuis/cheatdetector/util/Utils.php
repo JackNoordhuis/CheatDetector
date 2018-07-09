@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace jacknoordhuis\cheatdetector\util;
 
+use jacknoordhuis\cheatdetector\CheatDetector;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
@@ -31,6 +32,8 @@ abstract class Utils {
 	}
 
 	public static function broadcastStaffMessage(string $message) {
+		CheatDetector::getInstance()->getLogger()->info($message);
+
 		foreach(static::$staff as $staff) {
 			$staff->sendMessage(TextFormat::colorize($message, '&'));
 		}

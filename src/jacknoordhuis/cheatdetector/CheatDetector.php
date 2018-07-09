@@ -22,9 +22,11 @@ use jacknoordhuis\cheatdetector\entity\KillAuraDetector;
 use pocketmine\entity\Entity;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\Config;
 
 class CheatDetector extends PluginBase {
+
+	/** @var CheatDetector */
+	private static $instance;
 
 	/** @var EventListener|null */
 	private $listener;
@@ -37,7 +39,13 @@ class CheatDetector extends PluginBase {
 	}
 
 	public function onEnable() {
+		static::$instance = $this;
+
 		$this->listener = new EventListener($this);
+	}
+
+	public static function getInstance() : ?CheatDetector {
+		return static::$instance;
 	}
 
 	public function openCheatDetectionSession(Player $player, int $deviceOs) : void {
