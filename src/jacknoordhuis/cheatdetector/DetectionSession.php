@@ -279,24 +279,26 @@ class DetectionSession {
 	 */
 	public function updateFlyTriggers(Vector3 $to, float $yDistance) {
 		if(!$this->owner->getAllowFlight() and $this->owner != null) { // make sure the player isn't allowed to fly
-			foreach($this->owner->getBlocksAround() as $b) {
-				if($b instanceof Liquid) {
-					return;
-				}
-			}
-
 			$level = $this->owner->getLevel();
 			$blockInId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() + 1), $to->getFloorZ())->getId(); // block at players feet (used to make sure player isn't in a transparent block (cobwebs, water, etc)
 			$blockOnId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() - 0.5), $to->getFloorZ())->getId(); // block the player is on (use this for checking slabs, stairs, etc)
 			$blockBelowId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() - 1), $to->getFloorZ())->getId(); // block beneath the player
 			$inAir = ($blockOnId === Block::AIR and $blockInId === Block::AIR and $blockBelowId === Block::AIR);
 
-			if($this->hasDebugFly()) {
-				$this->owner->sendTip("Air ticks: " . $this->owner->getInAirTicks(). ", y-distance: " . $yDistance . ", In air: " . ($inAir ? "yes" : "no") . ", Fly chances: " . $this->flyChances);
-				$this->owner->sendPopup("Block on: " . $blockOnId. ", Block in: " . $blockInId . ", Block below: " . $blockBelowId);
+			$nearLiquid = false;
+			foreach($this->owner->getBlocksAround() as $b) {
+				if($b instanceof Liquid) {
+					$nearLiquid = true;
+					break;
+				}
 			}
 
-			if(microtime(true) - $this->lastDamagedTime >= 5) { // player hasn't taken damage for five seconds
+			if($this->hasDebugFly()) {
+				$this->owner->sendTip("Air ticks: " . $this->owner->getInAirTicks(). ", y-distance: " . $yDistance . ", In air: " . ($inAir ? "yes" : "no") . ", Fly chances: " . $this->flyChances);
+				$this->owner->sendPopup("Block on: " . $blockOnId. ", Block in: " . $blockInId . ", Block below: " . $blockBelowId . ", Near liquid: " . ($nearLiquid ? "yes" : "no"));
+			}
+
+			if(microtime(true) - $this->lastDamagedTime >= 5 or $nearLiquid) { // player hasn't taken damage for five seconds and isn't near liquid
 				// check fly upwards
 				if(($yDistance >= 0.05 or ($this->owner->getInAirTicks() >= 100 and $yDistance >= 0)) // TODO: Improve this so detection isn't triggered when players are moving horizontally
 					and $this->lastMoveTime - $this->lastJumpTime >= 2) { // if the movement wasn't downwards and the player hasn't jumped for 2 seconds
