@@ -21,6 +21,7 @@ namespace jacknoordhuis\cheatdetector;
 use jacknoordhuis\cheatdetector\entity\KillAuraDetector;
 use jacknoordhuis\cheatdetector\util\Utils;
 use pocketmine\block\Block;
+use pocketmine\block\Liquid;
 use pocketmine\entity\Entity;
 use pocketmine\math\Math;
 use pocketmine\math\Vector3;
@@ -57,7 +58,11 @@ class DetectionSession {
 		Block::SANDSTONE_STAIRS,
 		Block::STONE_BRICK_STAIRS,
 		Block::STONE_STAIRS,
-		Block::WOODEN_STAIRS
+		Block::WOODEN_STAIRS,
+		Block::WATER,
+		Block::FLOWING_WATER,
+		Block::LAVA,
+		Block::FLOWING_LAVA,
 	];
 
 
@@ -276,6 +281,12 @@ class DetectionSession {
 	 */
 	public function updateFlyTriggers(Vector3 $to, float $yDistance) {
 		if(!$this->owner->getAllowFlight() and $this->owner != null) { // make sure the player isn't allowed to fly
+			foreach($this->owner->getBlocksAround() as $b) {
+				if($b instanceof Liquid) {
+					return;
+				}
+			}
+
 			$level = $this->owner->getLevel();
 			$blockInId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() + 1), $to->getFloorZ())->getId(); // block at players feet (used to make sure player isn't in a transparent block (cobwebs, water, etc)
 			$blockOnId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() - 0.5), $to->getFloorZ())->getId(); // block the player is on (use this for checking slabs, stairs, etc)
