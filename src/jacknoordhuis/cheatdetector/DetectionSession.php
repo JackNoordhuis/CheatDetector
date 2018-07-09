@@ -185,9 +185,8 @@ class DetectionSession {
 	 */
 	public function checkKillAuraTriggers() : void {
 		if($this->killAuraTriggers >= 12) {
+			$this->owner->kick(TextFormat::colorize("&cYou have been kicked for using a modified client!", "&"), false);
 			Utils::broadcastStaffMessage("&a" . $this->owner->getName() . " &ehas been kicked for suspected kill-aura!");
-			$this->owner->kick(TextFormat::colorize("&cYou have been kicked for using a modified client!", "&", false));
-			Utils::broadcastStaffMessage("&a" . $this->owner->getName() . " &ehas been kicked for kill-aura!");
 		}
 	}
 
@@ -228,9 +227,8 @@ class DetectionSession {
 	 */
 	public function checkReachTriggers() {
 		if($this->reachChances >= 14) {
+			$this->owner->kick(TextFormat::colorize("&cYou have been kicked for using a modified client!", "&"), false);
 			Utils::broadcastStaffMessage("&a" . $this->owner->getName() . " &ehas been kicked for suspected reach!");
-			$this->owner->kick(TextFormat::colorize("&cYou have been kicked for using a modified client!", "&", false));
-			Utils::broadcastStaffMessage("&a" . $this->owner->getName() . " &ehas been kicked for reach!");
 		}
 	}
 
@@ -270,8 +268,8 @@ class DetectionSession {
 //					$banWaveTask->queue(new BanEntry(-1, $this->getName(), $this->getAddress(), $this->getClientId(), strtotime("+4 days"), time(), true, "You were banned automatically ¯\_(ツ)_/¯", "MAGIC I"));
 //				}
 //			}
-			Utils::broadcastStaffMessage("&a" . $this->owner->getName() . " &ehas been kicked for flying!");
-			$this->owner->kick(TextFormat::colorize("&cYou have been kicked for using a modified client!", "&", false));
+			$this->owner->kick(TextFormat::colorize("&cYou have been kicked for using a modified client!", "&"), false);
+			Utils::broadcastStaffMessage("&a" . $this->owner->getName() . " &ehas been kicked for suspected flight!");
 		}
 	}
 
