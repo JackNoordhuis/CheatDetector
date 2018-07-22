@@ -25,11 +25,11 @@ use pocketmine\plugin\PluginBase;
 
 class CheatDetector extends PluginBase {
 
-	/** @var CheatDetector */
-	private static $instance;
+	/** @var CheatDetector|null */
+	private static $instance = null;
 
 	/** @var EventListener|null */
-	private $listener;
+	private $listener = null;
 
 	/** @var DetectionSession[] */
 	private $sessions = [];
@@ -38,10 +38,27 @@ class CheatDetector extends PluginBase {
 		Entity::registerEntity(KillAuraDetector::class, true);
 	}
 
-	public function onEnable() {
+	public function onEnable()/* : void /* TODO: uncomment this for next major version */ {
 		static::$instance = $this;
 
+		$this->sessions = []; // make sure the sessions array is empty in-case the plugin is reloaded
+		foreach($this->getServer()->getOnlinePlayers() as $p) {
+			$this->openCheatDetectionSession($p, -1);
+		}
+
 		$this->listener = new EventListener($this);
+	}
+
+	public function onDisable()/* : void /* TODO: uncomment this for next major version */ {
+		foreach($this->sessions as $s) {
+			$s->destroy();
+		}
+
+		$this->listener->destroy();
+
+		unset($this->sessions, $this->listener);
+
+		static::$instance = null;
 	}
 
 	public static function getInstance() : ?CheatDetector {
@@ -65,6 +82,7 @@ class CheatDetector extends PluginBase {
 	public function closeCheatDetectionSession(Player $player) : void {
 		if($this->hasCheatDetectionSession($player)) {
 			$this->getCheatDetectionSession($player)->destroy();
+			unset($this->sessions[spl_object_id($player)]);
 		}
 	}
 

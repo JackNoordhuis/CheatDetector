@@ -4,4 +4,4 @@ authors:
   - Jack Noordhuis
 version: 0.0.1
 main: jacknoordhuis\cheatdetector\CheatDetector
-api: 3.0.0
+api: [3.0.0, 3.1.0]

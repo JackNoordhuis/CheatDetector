@@ -39,6 +39,10 @@ abstract class Utils {
 		}
 	}
 
+	public static function checkStaff(Player $player) : bool {
+		return isset(static::$staff[spl_object_id($player)]);
+	}
+
 	public static function removeStaff(Player $player) {
 		unset(static::$staff[spl_object_id($player)]);
 	}

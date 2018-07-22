@@ -39,6 +39,8 @@ class KillAuraDetector extends HumanNPC {
 	/** @var int */
 	protected $invisibleTicks = 900; // 45 seconds
 
+	const NETWORK_ID = -2; // rubbish network id as human entities are spawned with their own packet
+
 	public function initEntity() : void {
 		parent::initEntity();
 		$this->setInvisible(true);

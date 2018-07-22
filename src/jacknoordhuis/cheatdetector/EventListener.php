@@ -18,6 +18,8 @@ declare(strict_types=1);
 
 namespace jacknoordhuis\cheatdetector;
 
+use jacknoordhuis\cheatdetector\util\CheatDetectionReference;
+use jacknoordhuis\cheatdetector\util\Destroyable;
 use jacknoordhuis\cheatdetector\util\Utils;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
@@ -33,22 +35,22 @@ use pocketmine\Player;
 
 class EventListener implements Listener {
 
-	/** @var CheatDetector */
-	private $plugin;
+	use Destroyable, CheatDetectionReference {
+		getCheatDetector as getPlugin;
+	}
 
 	/** @var int[] */
 	private $osMap = [];
 
 	public function __construct(CheatDetector $plugin) {
-		$this->plugin = $plugin;
-
+		$this->setCheatDetector($plugin);
 		$plugin->getServer()->getPluginManager()->registerEvents($this, $plugin);
 	}
 
 	public function onJoin(PlayerJoinEvent $event) {
 		$player = $event->getPlayer();
 
-		$this->plugin->openCheatDetectionSession($player, $this->osMap[spl_object_id($player)] ?? -1);
+		$this->getPlugin()->openCheatDetectionSession($player, $this->osMap[spl_object_id($player)] ?? -1);
 
 		if($player->hasPermission("cheat.detection")) {
 			Utils::addStaff($player);
@@ -56,25 +58,17 @@ class EventListener implements Listener {
 	}
 
 	public function onQuit(PlayerQuitEvent $event) {
-		$player = $event->getPlayer();
-
-		$this->plugin->closeCheatDetectionSession($player);
-
-		if($player->hasPermission("cheat.detection")) {
-			Utils::removeStaff($player);
-		}
-
-		if(isset($this->osMap[$id = spl_object_id($player)])) {
-			unset($this->osMap[$id]);
-		}
+		$this->cleanupPlayer($event->getPlayer());
 	}
 
 	public function onKick(PlayerKickEvent $event) {
-		$player = $event->getPlayer();
+		$this->cleanupPlayer($event->getPlayer());
+	}
 
-		$this->plugin->closeCheatDetectionSession($player);
+	protected function cleanupPlayer(Player $player) {
+		$this->getPlugin()->closeCheatDetectionSession($player);
 
-		if($player->hasPermission("cheat.detection")) {
+		if(Utils::checkStaff($player)) {
 			Utils::removeStaff($player);
 		}
 
@@ -96,12 +90,12 @@ class EventListener implements Listener {
 	public function onEntityDamage(EntityDamageEvent $event) {
 		$victim = $event->getEntity();
 		if($victim instanceof Player) {
-			$s = $this->plugin->getCheatDetectionSession($victim);
+			$s = $this->getPlugin()->getCheatDetectionSession($victim);
 			$s->lastDamagedTime = microtime(true);
 			if($event instanceof EntityDamageByEntityEvent) {
 				$attacker = $event->getDamager();
 				if($attacker instanceof Player) {
-					$s = $this->plugin->getCheatDetectionSession($attacker);
+					$s = $this->getPlugin()->getCheatDetectionSession($attacker);
 					$s->updateReachTriggers($victim->distance($attacker));
 				}
 			}
@@ -111,18 +105,26 @@ class EventListener implements Listener {
 	public function onMove(PlayerMoveEvent $event) {
 		$player = $event->getPlayer();
 		if(!$player->hasPermission("vipcmds.fly")){
-			$s = $this->plugin->getCheatDetectionSession($player);
+			$s = $this->getPlugin()->getCheatDetectionSession($player);
 
 			$s->lastMoveTime = microtime(true);
 			$s->updateFlyTriggers($event->getTo(), round($event->getTo()->getY() - $event->getFrom()->getY(), 3));
+
 		}
 	}
 
 	public function onJump(PlayerJumpEvent $event) {
 		$player = $event->getPlayer();
-		$s = $this->plugin->getCheatDetectionSession($player);
+		$s = $this->getPlugin()->getCheatDetectionSession($player);
 
 		$s->lastJumpTime = microtime(true);
+	}
+
+	public function destroy() {
+		if(!$this->isDestroyed()) {
+			$this->setDestroyed();
+			$this->destroyCheatDetectorReference();
+		}
 	}
 
 }

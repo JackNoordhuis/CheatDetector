@@ -19,6 +19,8 @@ declare(strict_types=1);
 namespace jacknoordhuis\cheatdetector;
 
 use jacknoordhuis\cheatdetector\entity\KillAuraDetector;
+use jacknoordhuis\cheatdetector\util\CheatDetectionReference;
+use jacknoordhuis\cheatdetector\util\Destroyable;
 use jacknoordhuis\cheatdetector\util\Utils;
 use pocketmine\block\Block;
 use pocketmine\block\Liquid;
@@ -33,6 +35,10 @@ use pocketmine\scheduler\Task;
 use pocketmine\utils\TextFormat;
 
 class DetectionSession {
+
+	use Destroyable, CheatDetectionReference {
+		getCheatDetector as getPlugin;
+	}
 
 	/**
 	 * Array of block ids for the anti-fly to ignore
@@ -69,9 +75,6 @@ class DetectionSession {
 	/** @var Player */
 	private $owner;
 
-	/** @var CheatDetector */
-	private $plugin;
-
 	/** @var int */
 	private $deviceOs = -1;
 
@@ -102,9 +105,6 @@ class DetectionSession {
 	/** @var bool */
 	public $debugFly = false;
 
-	/** @var bool */
-	private $destroyed = false;
-
 	/** Device operating systems */
 	const OS_UNKNOWN = 0;
 	const OS_ANDROID = 1;
@@ -119,7 +119,7 @@ class DetectionSession {
 
 	public function __construct(Player $player, CheatDetector $plugin, int $deviceOs = self::OS_UNKNOWN) {
 		$this->owner = $player;
-		$this->plugin = $plugin;
+		$this->setCheatDetector($plugin);
 		$this->deviceOs = $deviceOs;
 
 		$this->killAuraTriggersDeincrementTask = new class($this) extends Task {
@@ -142,13 +142,6 @@ class DetectionSession {
 	 */
 	public function getOwner() : Player {
 		return $this->owner;
-	}
-
-	/**
-	 * @return CheatDetector
-	 */
-	public function getPlugin() : CheatDetector {
-		return $this->plugin;
 	}
 
 	/**
@@ -278,7 +271,7 @@ class DetectionSession {
 	 * @param float $yDistance
 	 */
 	public function updateFlyTriggers(Vector3 $to, float $yDistance) {
-		if(!$this->owner->getAllowFlight() and $this->owner != null) { // make sure the player isn't allowed to fly
+		if(!$this->owner->getAllowFlight()) { // make sure the player isn't allowed to fly
 			$level = $this->owner->getLevel();
 			$blockInId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() + 1), $to->getFloorZ())->getId(); // block at players feet (used to make sure player isn't in a transparent block (cobwebs, water, etc)
 			$blockOnId = $level->getBlockAt($to->getFloorX(), Math::ceilFloat($to->getY() - 0.5), $to->getFloorZ())->getId(); // block the player is on (use this for checking slabs, stairs, etc)
@@ -334,11 +327,10 @@ class DetectionSession {
 		}
 	}
 
-
 	public function destroy() {
-		if(!$this->destroyed) {
-			$this->destroyed = true;
-			$this->plugin->getScheduler()->cancelTask($this->killAuraTriggersDeincrementTask->getTaskId());
+		if(!$this->isDestroyed()) {
+			$this->setDestroyed();
+			$this->getPlugin()->getScheduler()->cancelTask($this->killAuraTriggersDeincrementTask->getTaskId());
 
 			foreach($this->killAuraDetectors as $e) {
 				$e->kill();
@@ -346,7 +338,9 @@ class DetectionSession {
 
 			$this->killAuraDetectors = [];
 
-			unset($this->owner, $this->plugin, $this->killAuraTriggersDeincrementTask);
+			$this->destroyCheatDetectorReference();
+
+			unset($this->owner, $this->killAuraTriggersDeincrementTask);
 		}
 	}
 
