@@ -4,8 +4,11 @@
     <list default="true" id="4ef73890-d212-4b3f-aa50-1e7a2fd196b8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/CheatDetector.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/CheatDetector.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/DetectionSession.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/DetectionSession.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/EventListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/EventListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/HumanNPC.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/HumanNPC.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/KillAuraDetector.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/KillAuraDetector.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/Utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/Utils.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,37 +20,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DetectionSession.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/DetectionSession.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3523">
-              <caret line="335" lean-forward="true" selection-start-line="335" selection-end-line="335" />
-              <folding>
-                <element signature="e#446#502#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="EventListener.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/EventListener.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="74" column="8" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+            <state relative-caret-position="235">
+              <caret line="110" column="24" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="24" />
               <folding>
-                <element signature="e#443#486#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utils.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/Utils.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
-              <folding>
-                <element signature="e#440#486#0#PHP" expanded="true" />
+                <element signature="e#443#504#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,6 +37,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>$ignoredBlocks</find>
+      <find>-&gt;plugin</find>
+      <find>n sendSpawn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -66,14 +47,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/HumanNPC.php" />
-        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/KillAuraDetector.php" />
         <option value="$PROJECT_DIR$/resources/Settings.yml" />
         <option value="$USER_HOME$/Desktop/duels-server/plugins/CheatDetector/Settings.yml" />
-        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/CheatDetector.php" />
-        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/DetectionSession.php" />
         <option value="$PROJECT_DIR$/plugin.yml" />
         <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/Utils.php" />
+        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/CheatDetectionReference.php" />
+        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/Destroyable.php" />
+        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/DetectionSession.php" />
+        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/CheatDetector.php" />
+        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/HumanNPC.php" />
+        <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/KillAuraDetector.php" />
         <option value="$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/EventListener.php" />
       </list>
     </option>
@@ -100,7 +83,9 @@
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -136,14 +121,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="jacknoordhuis" type="462c0819:PsiDirectoryNode" />
               <item name="cheatdetector" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CheatDetector" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CheatDetector" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="jacknoordhuis" type="462c0819:PsiDirectoryNode" />
-              <item name="cheatdetector" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -182,18 +159,17 @@
       <updated>1530687457797</updated>
       <workItem from="1530687464310" duration="11716000" />
       <workItem from="1531137542854" duration="1263000" />
-      <workItem from="1532234028178" duration="482000" />
+      <workItem from="1532234028178" duration="1920000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13461000" />
+    <option name="totallyTimeSpent" value="14899000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -202,7 +178,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32969698" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32969698" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -241,22 +217,8 @@
         <state relative-caret-position="1560">
           <caret line="104" column="94" selection-start-line="104" selection-start-column="94" selection-end-line="104" selection-end-column="94" />
           <folding>
-            <element signature="e#443#486#0#PHP" expanded="true" />
+            <element signature="e#443#504#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/KillAuraDetector.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/HumanNPC.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2357">
-          <caret line="233" column="9" selection-start-line="233" selection-start-column="9" selection-end-line="233" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -278,30 +240,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/CheatDetector.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="40" column="36" lean-forward="true" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
-          <folding>
-            <element signature="e#443#499#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/DetectionSession.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3523">
-          <caret line="335" lean-forward="true" selection-start-line="335" selection-end-line="335" />
-          <folding>
-            <element signature="e#446#502#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -315,12 +257,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/CheatDetectionReference.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/util/Destroyable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/DetectionSession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2039">
+          <caret line="331" column="46" selection-start-line="331" selection-start-column="46" selection-end-line="331" selection-end-column="46" />
+          <folding>
+            <element signature="e#446#502#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../PocketMine-MP/src/pocketmine/entity/Entity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="1906" column="8" selection-start-line="1906" selection-start-column="8" selection-end-line="1923" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../PocketMine-MP/src/pocketmine/entity/Human.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="815" column="61" lean-forward="true" selection-start-line="800" selection-start-column="16" selection-end-line="815" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/HumanNPC.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/entity/KillAuraDetector.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+          <folding>
+            <element signature="e#453#502#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/CheatDetector.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-314">
+          <caret line="36" column="34" lean-forward="true" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+          <folding>
+            <element signature="e#443#499#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/jacknoordhuis/cheatdetector/EventListener.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="74" column="8" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+        <state relative-caret-position="235">
+          <caret line="110" column="24" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="24" />
           <folding>
-            <element signature="e#443#486#0#PHP" expanded="true" />
+            <element signature="e#443#504#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

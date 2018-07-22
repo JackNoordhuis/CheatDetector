@@ -2,6 +2,6 @@ name: CheatDetector
 author: Jack Noordhuis
 authors:
   - Jack Noordhuis
-version: 0.0.1
+version: 0.0.2
 main: jacknoordhuis\cheatdetector\CheatDetector
 api: [3.0.0, 3.1.0]
